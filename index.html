@@ -206,7 +206,21 @@ button{font:inherit}
 .band.fold:last-child .wave-b{display:block}
 .psum{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(24px,5vw,72px);align-items:center;padding:0 var(--pad)}
 .band.flip .psum{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr)}
-.band.flip .pcover{order:2}
+.band.flip .pcov-wrap{order:2}
+.pcov-wrap{position:relative}
+.seal{all:unset;box-sizing:border-box;position:absolute;right:-22px;top:-26px;z-index:3;width:118px;height:118px;border-radius:50%;background:var(--red);color:var(--white);border:4px solid var(--black);box-shadow:5px 5px 0 var(--black);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;cursor:pointer;transform:rotate(12deg);animation:sealBob 2.4s ease-in-out infinite}
+.seal::before{content:"";position:absolute;inset:6px;border-radius:50%;border:2px dashed rgba(255,255,255,.7);animation:sealSpin 12s linear infinite}
+.seal .s1{font-family:var(--display);font-size:40px;line-height:.85;color:var(--yellow);text-shadow:2px 2px 0 var(--black)}
+.seal .s2{font-family:var(--pixel);font-size:11px;line-height:1.1;max-width:84px;margin-top:4px}
+.seal:hover{background:#ff3b2f}
+.seal:focus-visible{outline:3px solid var(--yellow);outline-offset:4px}
+@keyframes sealBob{0%,100%{transform:rotate(12deg) scale(1)}50%{transform:rotate(6deg) scale(1.07)}}
+@keyframes sealSpin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.seal,.seal::before{animation:none}}
+.pteam{margin:-12px 0 22px;font-size:14px;display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center}
+.pteam .tl{font-family:var(--pixel);opacity:.75;margin-right:2px}
+.pteam a{text-decoration:none;font-weight:500;padding:2px 10px;border-radius:30px;border:2px solid currentColor;transition:background .2s,color .2s}
+.pteam a:hover{background:var(--fg);color:var(--bg)}
 .pcover{all:unset;display:block;cursor:pointer;aspect-ratio:3/2;border-radius:20px;overflow:hidden;border:3px solid var(--black);box-shadow:10px 10px 0 var(--shadow,var(--black));background:var(--black);transition:transform .25s,box-shadow .25s}
 .pcover img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
 .pcover:hover{transform:translate(-3px,-3px);box-shadow:13px 13px 0 var(--shadow,var(--black))}
@@ -228,7 +242,7 @@ button{font:inherit}
 .pmore-in .ptop > div:first-child{display:none}
 .pmore-in .ptop .desc{max-width:70ch}
 @media (prefers-reduced-motion:reduce){.pmore,.pmore-in,.pcover,.pcover img{transition:none}}
-@media (max-width:860px){.psum,.band.flip .psum,.id-sum{grid-template-columns:1fr;gap:26px}.band.flip .pcover{order:0}.band.fold{margin-top:50px}.band.fold .wave{height:30px}.pshort{font-size:16px;margin:12px 0 20px}}
+@media (max-width:860px){.psum,.band.flip .psum,.id-sum{grid-template-columns:1fr;gap:26px}.band.flip .pcov-wrap{order:0}.seal{width:96px;height:96px;right:-6px;top:-22px}.seal .s1{font-size:32px}.seal .s2{font-size:10px}.band.fold{margin-top:50px}.band.fold .wave{height:30px}.pshort{font-size:16px;margin:12px 0 20px}}
 
 /* dragão: linha do tempo do processo */
 .process{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(24px,4vw,60px);padding:0 var(--pad);align-items:center}
@@ -646,13 +660,6 @@ button.act:focus-visible{outline:3px solid #ffd001;outline-offset:3px}
 .lbx .pv{left:16px;top:50%;margin-top:-26px}
 .lbx .nx{right:16px;top:50%;margin-top:-26px}
 
-/* ---------- cursor ---------- */
-.cursor{position:fixed;left:0;top:0;z-index:120;pointer-events:none;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;background:var(--red);border:2px solid var(--black);display:grid;place-items:center;font-family:var(--pixel);font-size:12px;color:var(--white);transition:width .2s,height .2s,margin .2s,background .2s}
-.cursor.drag,.cursor.view{width:74px;height:74px;margin:-37px 0 0 -37px}
-.cursor.drag{background:var(--yellow);color:var(--black)}
-.cursor.drag::after{content:attr(data-drag)}
-.cursor.view::after{content:attr(data-view)}
-@media (hover:none){.cursor{display:none}}
 
 .reveal{opacity:0;transform:translateY(40px) rotate(-2deg);transition:opacity .8s,transform .9s cubic-bezier(.2,.8,.2,1)}
 .reveal.in{opacity:1;transform:none}
@@ -908,7 +915,6 @@ html.sp-lock-scroll,html.sp-lock-scroll body{overflow:hidden}
   </div>
 </div>
 
-<div class="cursor" aria-hidden="true" data-drag="DRAG" data-view="VIEW"></div>
 
 <nav class="nav" aria-label="Main">
   <a class="brand" href="#top"><img src="assets/img/brand/logo-stack.webp" alt="GeDodo"></a>
@@ -2106,6 +2112,13 @@ window.SlimeProto = SlimeProto;
 const A = "assets/img/";
 const range = (slug, n) => Array.from({length:n}, (_, i) => `${A}${slug}/s${String(i+1).padStart(2,"0")}.webp`);
 
+/* colegas que fizeram os projetos comigo: nome e link que cada um pediu */
+const PEOPLE = {
+  luiz: ["Luiz Leão", "https://luizleao.carrd.co/"],
+  eduardo: ["Eduardo Wolinger", "https://www.instagram.com/eduardo.wolinger/"],
+  tiago: ["Tiago Souza", "https://www.instagram.com/tejota.gg/"],
+  artur: ["Artur Hauache", "https://www.instagram.com/artur.hauache02/"]
+};
 const PROJECTS = [
   {
     id: "slime", bg: "#123a73", fg: "#ffffff", shadow: "#ffb01a",
@@ -2123,6 +2136,7 @@ const PROJECTS = [
   },
   {
     id: "racer", bg: "#1d1d1b", fg: "#ffffff", shadow: "#e42320",
+    team: ["luiz", "tiago", "artur", "eduardo"],
     cover: A+"racer/final.webp",
     short: { en: "A serious game that puts you behind the wheel with someone else's eyes. Paper at CSEDU 2024 and Most Popular Game at PUC Game Show.", pt: "Um jogo sério que coloca você ao volante com os olhos de outra pessoa. Artigo na CSEDU 2024 e Jogo Mais Popular no PUC Game Show." },
     title: "Disability Racer",
@@ -2137,6 +2151,7 @@ const PROJECTS = [
   },
   {
     id: "seed", type: "seed", bg: "#6b4423", fg: "#ffffff", shadow: "#7ed957",
+    team: ["luiz", "eduardo"],
     cover: A+"seed/cover.webp",
     short: { en: "An idle clicker about planting trees, made in 72 hours by a team of three at BGS Jam 2022.", pt: "Um clicker sobre plantio de árvores, feito em 72 horas por uma equipe de três pessoas na BGS Jam 2022." },
     title: "Seed Clicker",
@@ -2148,6 +2163,7 @@ const PROJECTS = [
   },
   {
     id: "goblin", bg: "#2a1c5c", fg: "#ffffff", shadow: "#3ddc4a",
+    team: ["luiz", "tiago", "artur", "eduardo"],
     cover: A+"goblin/final.webp",
     short: { en: "Territory control where every region you conquer is one more you have to protect.", pt: "Controle de território em que cada região conquistada é mais uma para proteger." },
     title: "Go Blin! Human Slayer",
@@ -2176,6 +2192,7 @@ const PROJECTS = [
   },
   {
     id: "wizards", bg: "#1646a8", fg: "#ffffff", shadow: "#ffb01a",
+    team: ["luiz", "tiago", "eduardo"],
     cover: A+"wizards/final.webp",
     short: { en: "A three-player PvP board game on a modular hex board, decided by positioning, arrow direction and dice.", pt: "Um jogo de tabuleiro PvP para três jogadores num tabuleiro hexagonal modular, decidido por posicionamento, direção das setas e dados." },
     title: "League of Wizards",
@@ -2387,7 +2404,7 @@ const T = {
     "contact.t1":"Let's make a game,","contact.t2":"it's gonna be awesome.","contact.text":"Open to opportunities in concept art, game art, visual development and game design.",
     "foot":"GeDodo by Douglas de Souza Castro",
     "gate.enter":"View portfolio","gate.pick":"Choose your language",
-    sketch:"Sketch", final:"Final", compare:"Drag to compare", wip:"In progress", openP:"See full project", closeP:"Collapse", openI:"See full identity",
+    sketch:"Sketch", final:"Final", compare:"Drag to compare", wip:"In progress", openP:"See full project", closeP:"Collapse", team:"Team", seal1:"Play", seal2:"playable prototype", openI:"See full identity",
     stage:"Stage", play:"Play the process", pause:"Pause", seeFinal:"See final render", timelapse:"Watch timelapse",
     slide:"slide", prev:"Previous", next:"Next", view:"VIEW", drag:"DRAG", scrub:"Move through",
     ticker:["Concept art","Creature design","Encounter design","Systems design","Visual development","Art direction","Worldbuilding"],
@@ -2432,7 +2449,7 @@ const T = {
     "contact.t1":"Vamos criar um jogo,","contact.t2":"vai ser massa.","contact.text":"Aberto a oportunidades em concept art, game art, visual development e game design.",
     "foot":"GeDodo, por Douglas de Souza Castro",
     "gate.enter":"Ver portfólio","gate.pick":"Escolha o idioma",
-    sketch:"Esboço", final:"Final", compare:"Arraste para comparar", wip:"Em andamento", openP:"Ver projeto completo", closeP:"Recolher", openI:"Ver identidade completa",
+    sketch:"Esboço", final:"Final", compare:"Arraste para comparar", wip:"Em andamento", openP:"Ver projeto completo", closeP:"Recolher", team:"Equipe", seal1:"Jogue", seal2:"protótipo jogável", openI:"Ver identidade completa",
     stage:"Etapa", play:"Ver o processo", pause:"Pausar", seeFinal:"Ver arte final", timelapse:"Ver timelapse",
     slide:"slide", prev:"Anterior", next:"Próximo", view:"VER", drag:"ARRASTE", scrub:"Navegar por",
     ticker:["Concept art","Design de criatura","Design de encontro","Design de sistemas","Visual development","Direção de arte","Worldbuilding"],
@@ -2578,14 +2595,18 @@ function makeCollapsible(band, p, pi){
   const more = el("div", "pmore"), inner = el("div", "pmore-in"); more.appendChild(inner); more.id = "more-" + p.id;
   [...band.children].forEach(c => { if (!c.classList.contains("wave") && !c.classList.contains("s-forest") && !c.classList.contains("uni-pat")) inner.appendChild(c); });
   const sum = el("div", "psum");
-  sum.innerHTML = `<button type="button" class="pcover" aria-controls="${more.id}" aria-expanded="false" tabindex="-1"><img src="${R(p.cover)}" alt="" loading="lazy" decoding="async"></button>
+  sum.innerHTML = `<div class="pcov-wrap"><button type="button" class="pcover" aria-controls="${more.id}" aria-expanded="false" tabindex="-1"><img src="${R(p.cover)}" alt="" loading="lazy" decoding="async"></button>
+      ${p.proto ? `<button type="button" class="seal"><span class="s1"></span><span class="s2"></span></button>` : ""}</div>
     <div class="ptext"><p class="kind">${icon(p.icon)}<span></span></p><h3 class="reveal">${p.title}${p.wip ? '<span class="wip"></span>' : ""}</h3><p class="pshort"></p>
+      ${p.team ? `<p class="pteam"><span class="tl"></span> ${p.team.map(k => `<a href="${PEOPLE[k][1]}" target="_blank" rel="noopener">${PEOPLE[k][0]}</a>`).join(" ")}</p>` : ""}
       <button type="button" class="btn pbtn" aria-controls="${more.id}" aria-expanded="false"><span></span><svg class="ico chev" aria-hidden="true"><use href="#i-arrow"/></svg></button></div>`;
   band.appendChild(sum); band.appendChild(more); band.appendChild(bottom.firstChild);
   addWave($(".wave-b", band), pi * 1.7 + 3, true);
   const btns = [$(".pcover", sum), $(".pbtn", sum)];
   bind(sum, n => { $(".kind span", n).textContent = L(p.kind); $(".pshort", n).textContent = L(p.short); if (p.wip) $(".wip", n).textContent = tr("wip");
-    $(".pbtn span", n).textContent = band.classList.contains("open") ? tr("closeP") : tr("openP"); $(".pcover img", n).alt = p.title; });
+    $(".pbtn span", n).textContent = band.classList.contains("open") ? tr("closeP") : tr("openP"); $(".pcover img", n).alt = p.title;
+    if (p.team) $(".pteam .tl", n).textContent = tr("team");
+    if (p.proto){ $(".seal .s1", n).textContent = tr("seal1"); $(".seal .s2", n).textContent = tr("seal2"); } });
   inner.inert = true;
   const set = open => {
     if (!open && band.getBoundingClientRect().top < 0) band.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
@@ -2595,6 +2616,9 @@ function makeCollapsible(band, p, pi){
   };
   btns.forEach(b => b.addEventListener("click", () => set(!band.classList.contains("open"))));
   band._open = () => set(true);
+  /* selo do protótipo: abre o bloco e desce até o jogo */
+  const seal = $(".seal", sum);
+  if (seal) seal.onclick = () => { if (!band.classList.contains("open")) set(true); setTimeout(() => { const g = $(".proto", band); if (g) g.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" }); }, reduce ? 0 : 650); };
 }
 /* link direto para um projeto (#p-slime) já abre o bloco */
 const openFromHash = () => { const b = location.hash && document.getElementById(location.hash.slice(1)); if (b && b._open){ b._open(); } };
@@ -3064,7 +3088,6 @@ bind($("#inv"), n => {
   });
 })();
 bind($("#ticker"), n => { const one = tr("ticker").map((w, i) => `<span>${w}</span>${icon(["i-tri","i-up","i-slider","i-target","i-dash"][i % 5])}`).join(""); n.innerHTML = one + one + one; });
-bind($(".cursor"), n => { n.dataset.view = tr("view"); n.dataset.drag = tr("drag"); });
 
 /* ---------- idioma ---------- */
 function setLang(l){
@@ -3127,16 +3150,6 @@ if (!reduce) requestAnimationFrame(frame);
 /* nav sólida depois do hero */
 addEventListener("scroll", () => $(".nav").classList.toggle("solid", scrollY > innerHeight * .7), { passive: true });
 
-/* ---------- cursor ---------- */
-(() => {
-  const c = $(".cursor"); if (!matchMedia("(hover:hover)").matches) return;
-  let x = -100, y = -100, cx = x, cy = y;
-  addEventListener("pointermove", e => { x = e.clientX; y = e.clientY; const t = e.target;
-    const view = t.closest && t.closest(".pano button, .card > button, .frame");
-    const drag = t.closest && t.closest(".track") && !t.closest(".compare");
-    c.classList.toggle("view", !!view); c.classList.toggle("drag", !view && !!drag); });
-  const loop = () => { cx += (x - cx) * .25; cy += (y - cy) * .25; c.style.transform = `translate(${cx}px,${cy}px)`; requestAnimationFrame(loop); }; loop();
-})();
 
 /* ---------- tela de entrada: a composição da identidade se desmonta e vira o hero ---------- */
 (() => {
