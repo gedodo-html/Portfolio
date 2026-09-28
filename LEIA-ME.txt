@@ -1,0 +1,21 @@
+GeDodo, landing page de portfólio
+
+index.html      a página
+assets/img      imagens otimizadas (webp)
+assets/fonts    Medula One, Mardoto, Tiny5 e Pixelify Sans
+games/seedclicker  o Seed Clicker (exportação web do Construct), que roda dentro da página
+
+O protótipo do Slime vs Baleia está embutido no próprio index.html.
+O botão "Jogar aqui" do Seed Clicker só funciona com o site hospedado (GitHub Pages).
+
+Publicar no GitHub Pages
+1. Crie um repositório público no GitHub (sugestão de nome: seu-usuario.github.io).
+2. Envie TODO o conteúdo desta pasta para a raiz do repositório
+   (o index.html precisa ficar na raiz, não dentro de outra pasta).
+   Com mais de 100 arquivos, o jeito mais simples é o GitHub Desktop.
+3. No repositório: Settings > Pages > Build and deployment >
+   Source: Deploy from a branch > Branch: main, pasta / (root) > Save.
+4. Em 1 a 3 minutos o site aparece no endereço mostrado nessa mesma tela.
+
+Para adicionar um projeto: veja o bloco "COMO ATUALIZAR" no começo do segundo <script> do index.html.
+Cada bloco de projeto precisa de "cover" (imagem principal) e "short" (resumo curto, em inglês e português).
