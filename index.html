@@ -161,17 +161,18 @@ button{font:inherit}
 @media (max-width:860px){.ptop{grid-template-columns:1fr}.band{margin-top:50px}.band .wave{height:50px}:root{--h:min(64vh,122vw)}.ctrl{flex-wrap:wrap}.ctrl .scrub{order:3;flex-basis:100%}}
 
 /* ---------- identidade visual do GeDodo ---------- */
-.idsec{--bg:var(--white);--fg:var(--black);padding-bottom:clamp(90px,12vh,140px)}
-.idsec .head{padding-top:clamp(40px,6vh,70px)}
-.id-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.4fr);gap:clamp(28px,5vw,72px);padding:0 var(--pad);align-items:start}
-.id-draw{margin:0;position:sticky;top:96px}
-.id-canvas{position:relative;border-radius:20px;overflow:hidden;border:3px solid var(--black);box-shadow:10px 10px 0 var(--yellow);background:var(--white);transform:rotate(-1.5deg)}
-.id-canvas canvas{display:block;width:100%;height:auto;aspect-ratio:1}
+.idsec{--bg:var(--white);--fg:var(--black);--shadow:var(--yellow);padding:clamp(28px,5vh,56px) 0 clamp(90px,12vh,140px)}
+.id-sum{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr)}
+.id-sum .id-canvas{width:100%;max-width:500px;justify-self:center}
+.id-sum h2{font-family:var(--display);font-weight:400;font-size:clamp(66px,9vw,140px);line-height:.84;margin:0}
+.id-vcap{font-size:14px;opacity:.7;max-width:44ch;margin:-12px 0 24px}
+.id-canvas{position:relative;border-radius:20px;overflow:hidden;border:3px solid var(--black);box-shadow:10px 10px 0 var(--yellow);background:var(--white);transform:rotate(-1.5deg);aspect-ratio:1}
+.id-canvas video{display:block;width:100%;height:100%;object-fit:cover}
 .id-replay{position:absolute;right:12px;bottom:12px;display:inline-flex;align-items:center;gap:6px;font:inherit;font-family:var(--pixel);font-size:13px;padding:6px 10px;border-radius:10px;border:3px solid var(--black);background:var(--white);color:var(--black);cursor:pointer;box-shadow:3px 3px 0 var(--black);opacity:0;transition:opacity .3s}
 .id-canvas.done .id-replay,.id-replay:focus-visible{opacity:1}
 .id-replay .ico{width:14px;height:14px}
-.id-draw figcaption{font-size:14px;margin-top:18px;opacity:.75;max-width:40ch}
-.id-why{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.id-grid{padding:0 var(--pad)}
+.id-why{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
 .id-card{border:3px solid var(--black);border-radius:18px;padding:20px 22px;background:var(--white);box-shadow:5px 5px 0 var(--black)}
 .id-card.wide{grid-column:1/-1}
 .id-card.goal{background:var(--black);color:var(--white);box-shadow:5px 5px 0 var(--red)}
@@ -195,13 +196,14 @@ button{font:inherit}
 .id-strip button:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--red)}
 .id-strip button:focus-visible{outline:3px solid var(--red);outline-offset:3px}
 .id-strip img{width:100%;height:100%;object-fit:cover}
-@media (max-width:860px){.id-grid{grid-template-columns:1fr}.id-draw{position:static;max-width:420px;margin:0 auto}.id-why{grid-template-columns:1fr}.id-strip{grid-template-columns:repeat(2,minmax(0,1fr))}.id-replay{opacity:1}}
+@media (max-width:860px){.id-canvas{max-width:440px}.id-why{grid-template-columns:1fr}.id-strip{grid-template-columns:repeat(2,minmax(0,1fr))}.id-replay{opacity:1}}
 
 /* ---------- blocos de projeto recolhíveis ---------- */
-.band.fold{padding:clamp(28px,5vh,56px) 0 clamp(30px,5vh,56px);margin-top:110px}
-.band.fold + .band.fold{margin-top:110px}
+.band.fold{padding:clamp(28px,5vh,56px) 0 clamp(64px,9vh,96px);margin-top:70px}
+.band.fold + .band.fold{margin-top:0}   /* como antes: a onda do bloco seguinte sobrepõe o fim do anterior */
 .band.fold .wave{height:44px}
-.band.fold .wave-b{top:auto;bottom:1px;transform:translateY(100%) scaleY(-1)}
+.band.fold .wave-b{top:auto;bottom:1px;transform:translateY(100%) scaleY(-1);display:none}
+.band.fold:last-child .wave-b{display:block}
 .psum{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(24px,5vw,72px);align-items:center;padding:0 var(--pad)}
 .band.flip .psum{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr)}
 .band.flip .pcover{order:2}
@@ -226,7 +228,7 @@ button{font:inherit}
 .pmore-in .ptop > div:first-child{display:none}
 .pmore-in .ptop .desc{max-width:70ch}
 @media (prefers-reduced-motion:reduce){.pmore,.pmore-in,.pcover,.pcover img{transition:none}}
-@media (max-width:860px){.psum,.band.flip .psum{grid-template-columns:1fr;gap:26px}.band.flip .pcover{order:0}.band.fold,.band.fold + .band.fold{margin-top:80px}.band.fold .wave{height:30px}.pshort{font-size:16px;margin:12px 0 20px}}
+@media (max-width:860px){.psum,.band.flip .psum,.id-sum{grid-template-columns:1fr;gap:26px}.band.flip .pcover{order:0}.band.fold{margin-top:50px}.band.fold .wave{height:30px}.pshort{font-size:16px;margin:12px 0 20px}}
 
 /* dragão: linha do tempo do processo */
 .process{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(24px,4vw,60px);padding:0 var(--pad);align-items:center}
@@ -993,16 +995,19 @@ html.sp-lock-scroll,html.sp-lock-scroll body{overflow:hidden}
 </section>
 <section class="band idsec" id="identity" aria-labelledby="id-title">
   <svg class="wave" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
-  <div class="head">
-    <h2 id="id-title" class="reveal"><span data-i18n="id.title">The identity</span><svg class="ico"><use href="#i-target"/></svg></h2>
-    <p data-i18n="id.lead"></p>
+  <div class="psum id-sum">
+    <div class="id-canvas">
+      <video id="idVid" muted playsinline preload="metadata" poster="assets/img/brand/avatar-draw-end.webp" aria-label="GeDodo avatar"><source src="assets/img/brand/avatar-draw.webm" type="video/webm"><source src="assets/img/brand/avatar-draw.mp4" type="video/mp4"></video>
+      <button type="button" class="id-replay" id="idReplay"><svg class="ico" aria-hidden="true"><use href="#i-replay"/></svg><span data-i18n="id.replay"></span></button>
+    </div>
+    <div class="ptext"><p class="kind"><svg class="ico" aria-hidden="true"><use href="#i-target"/></svg><span data-i18n="id.kind"></span></p>
+      <h2 id="id-title" class="reveal" data-i18n="id.title">The identity</h2>
+      <p class="pshort" data-i18n="id.lead"></p>
+      <p class="id-vcap" data-i18n="id.drawCap"></p>
+      <button type="button" class="btn pbtn" id="idToggle" aria-controls="more-identity" aria-expanded="false"><span></span><svg class="ico chev" aria-hidden="true"><use href="#i-arrow"/></svg></button></div>
   </div>
-  <div class="id-grid">
-    <figure class="id-draw">
-      <div class="id-canvas"><canvas id="idDraw" width="480" height="480" role="img" aria-label="GeDodo avatar"></canvas>
-        <button type="button" class="id-replay" id="idReplay"><svg class="ico" aria-hidden="true"><use href="#i-replay"/></svg><span data-i18n="id.replay"></span></button></div>
-      <figcaption data-i18n="id.drawCap"></figcaption>
-    </figure>
+  <div class="pmore" id="more-identity"><div class="pmore-in">
+    <div class="id-grid">
     <div class="id-why">
       <article class="id-card wide"><img class="id-mini" src="assets/img/brand/logo-line.webp" alt="" loading="lazy"><h3 data-i18n="id.nameT"></h3><p data-i18n="id.nameP"></p></article>
       <article class="id-card"><h3 data-i18n="id.logoT"></h3><p data-i18n="id.logoP"></p></article>
@@ -1012,12 +1017,13 @@ html.sp-lock-scroll,html.sp-lock-scroll body{overflow:hidden}
       <article class="id-card"><h3 data-i18n="id.avatarT"></h3><p data-i18n="id.avatarP"></p></article>
       <article class="id-card goal"><h3 data-i18n="id.goalT"></h3><p data-i18n="id.goalP"></p></article>
     </div>
-  </div>
-  <div class="id-build">
+    </div>
+    <div class="id-build">
     <div class="id-bhead"><div><h3 data-i18n="id.buildT"></h3><p data-i18n="id.buildP"></p></div>
       <button type="button" class="btn" id="idOpen"><span data-i18n="id.buildBtn"></span><svg class="ico"><use href="#i-arrow"/></svg></button></div>
     <div class="id-strip" id="idStrip"></div>
   </div>
+  </div></div>
 </section>
 </main>
 
@@ -2008,6 +2014,17 @@ function SlimeProto(root, opts) {
       cx.save(); cx.translate(w.x * cs, w.y * cs); cx.rotate(w.a - Math.PI / 2); cx.globalAlpha = S.phase === 2 ? .55 : .3;
       spr(S.phase === 2 ? WT.sh2 : WT.sh1, .92); cx.restore(); cx.globalAlpha = 1;
     }
+    /* v13: o slime é desenhado antes da baleia, então passa por baixo dela */
+    const s = S.slime;
+    if (!(s.inv > 0 && Math.floor(s.inv * 14) % 2) && s.lives > 0){
+      const sx = s.rx * cs, sy = s.ry * cs, squ = s.hurt > 0 ? .8 : 1;
+      cx.fillStyle = COL.ink; cx.fillRect(sx + 1, sy + 1, cs - 2, cs - 2);
+      cx.fillStyle = s.hurt > 0 ? COL.red : COL.slime; cx.fillRect(sx + 3, sy + 3 + cs * (1 - squ) / 2, cs - 6, (cs - 6) * squ);
+      /* olhos mostram para onde ele vai atacar */
+      cx.fillStyle = COL.ink; const e = Math.max(2, cs * .14), mx = sx + cs / 2 + s.fx * cs * .18, my = sy + cs / 2 + s.fy * cs * .18;
+      if (s.fx) { cx.fillRect(mx - e / 2, my - cs * .18, e, e); cx.fillRect(mx - e / 2, my + cs * .06, e, e); }
+      else { cx.fillRect(mx - cs * .18, my - e / 2, e, e); cx.fillRect(mx + cs * .06, my - e / 2, e, e); }
+    }
     if ((!w.dead || w.dead < 1) && w.sink < 1){
       const bob = Math.sin(w.bob * 3) * .1, ca = Math.cos(w.a), sa = Math.sin(w.a);
       const x = (w.x + ca * w.nudge) * cs, y = (w.y + sa * w.nudge + bob) * cs;
@@ -2035,17 +2052,9 @@ function SlimeProto(root, opts) {
     for (const f of S.swings){ const k = f.t / .16; cx.globalAlpha = 1 - k * .7;
       f.cells.forEach(([x, y], i) => { cx.fillStyle = i ? COL.yellow : "#ffffff"; sq(x, y, lerp(1, cs * .3, k)); cx.strokeStyle = COL.ink; cx.lineWidth = 2; cx.strokeRect(x * cs + 1, y * cs + 1, cs - 2, cs - 2); });
       cx.globalAlpha = 1; }
-    /* slime */
-    const s = S.slime;
-    if (!(s.inv > 0 && Math.floor(s.inv * 14) % 2) && s.lives > 0){
-      const sx = s.rx * cs, sy = s.ry * cs, squ = s.hurt > 0 ? .8 : 1;
-      cx.fillStyle = COL.ink; cx.fillRect(sx + 1, sy + 1, cs - 2, cs - 2);
-      cx.fillStyle = s.hurt > 0 ? COL.red : COL.slime; cx.fillRect(sx + 3, sy + 3 + cs * (1 - squ) / 2, cs - 6, (cs - 6) * squ);
-      /* olhos mostram para onde ele vai atacar */
-      cx.fillStyle = COL.ink; const e = Math.max(2, cs * .14), mx = sx + cs / 2 + s.fx * cs * .18, my = sy + cs / 2 + s.fy * cs * .18;
-      if (s.fx) { cx.fillRect(mx - e / 2, my - cs * .18, e, e); cx.fillRect(mx - e / 2, my + cs * .06, e, e); }
-      else { cx.fillRect(mx - cs * .18, my - e / 2, e, e); cx.fillRect(mx + cs * .06, my - e / 2, e, e); }
-    }
+    /* slime por baixo da baleia: um contorno fraco mostra onde ele está */
+    if (!(s.inv > 0 && Math.floor(s.inv * 14) % 2) && s.lives > 0 && inWhale(s.x + .5, s.y + .5, .2)){
+      cx.globalAlpha = .7; cx.strokeStyle = "#7dff6a"; cx.lineWidth = 2; cx.strokeRect(s.rx * cs + 2, s.ry * cs + 2, cs - 4, cs - 4); cx.globalAlpha = 1; }
     /* partículas e números */
     for (const p of S.parts){ cx.globalAlpha = 1 - p.t / p.life; cx.fillStyle = p.c; const z = p.s * cs; cx.fillRect(p.x * cs - z / 2, p.y * cs - z / 2, z, z); }
     cx.globalAlpha = 1;
@@ -2349,7 +2358,8 @@ const T = {
     "nav.identity":"Identity",
     "id.title":"The identity",
     "id.lead":"How GeDodo presents itself and why: a brand that reads like a game interface and holds up on any background.",
-    "id.drawCap":"The avatar being traced line by line, then colored. Animation built from the final illustration.",
+    "id.kind":"Visual identity",
+    "id.drawCap":"My original pencil sketch, sped up, then the final digital avatar being traced and colored.",
     "id.replay":"Draw again",
     "id.nameT":"The name",
     "id.nameP":"GeDodo comes from <b>Game Design Document</b>, the document that holds a game together. The “dodo” at the end is also me: Douglas. It is a personal game design lab, a place to turn ideas, mechanics and experiences into small visual studies and design documents.",
@@ -2377,7 +2387,7 @@ const T = {
     "contact.t1":"Let's make a game,","contact.t2":"it's gonna be awesome.","contact.text":"Open to opportunities in concept art, game art, visual development and game design.",
     "foot":"GeDodo by Douglas de Souza Castro",
     "gate.enter":"View portfolio","gate.pick":"Choose your language",
-    sketch:"Sketch", final:"Final", compare:"Drag to compare", wip:"In progress", openP:"See full project", closeP:"Collapse",
+    sketch:"Sketch", final:"Final", compare:"Drag to compare", wip:"In progress", openP:"See full project", closeP:"Collapse", openI:"See full identity",
     stage:"Stage", play:"Play the process", pause:"Pause", seeFinal:"See final render", timelapse:"Watch timelapse",
     slide:"slide", prev:"Previous", next:"Next", view:"VIEW", drag:"DRAG", scrub:"Move through",
     ticker:["Concept art","Creature design","Encounter design","Systems design","Visual development","Art direction","Worldbuilding"],
@@ -2393,7 +2403,8 @@ const T = {
     "nav.identity":"Identidade",
     "id.title":"A identidade",
     "id.lead":"Como o GeDodo se apresenta e por quê: uma marca que se lê como interface de jogo e funciona em qualquer fundo.",
-    "id.drawCap":"O avatar sendo traçado linha por linha e depois colorido. Animação feita a partir da ilustração final.",
+    "id.kind":"Identidade visual",
+    "id.drawCap":"Meu rascunho original a lápis, acelerado, e depois o avatar digital final sendo traçado e colorido.",
     "id.replay":"Desenhar de novo",
     "id.nameT":"O nome",
     "id.nameP":"GeDodo vem de <b>Game Design Document</b>, o documento que sustenta um jogo. O “dodo” do final também sou eu: Douglas. É um laboratório pessoal de game design, um espaço para transformar ideias, mecânicas e experiências em pequenos estudos visuais e documentações de design.",
@@ -2421,7 +2432,7 @@ const T = {
     "contact.t1":"Vamos criar um jogo,","contact.t2":"vai ser massa.","contact.text":"Aberto a oportunidades em concept art, game art, visual development e game design.",
     "foot":"GeDodo, por Douglas de Souza Castro",
     "gate.enter":"Ver portfólio","gate.pick":"Escolha o idioma",
-    sketch:"Esboço", final:"Final", compare:"Arraste para comparar", wip:"Em andamento", openP:"Ver projeto completo", closeP:"Recolher",
+    sketch:"Esboço", final:"Final", compare:"Arraste para comparar", wip:"Em andamento", openP:"Ver projeto completo", closeP:"Recolher", openI:"Ver identidade completa",
     stage:"Etapa", play:"Ver o processo", pause:"Pausar", seeFinal:"Ver arte final", timelapse:"Ver timelapse",
     slide:"slide", prev:"Anterior", next:"Próximo", view:"VER", drag:"ARRASTE", scrub:"Navegar por",
     ticker:["Concept art","Design de criatura","Design de encontro","Design de sistemas","Visual development","Direção de arte","Worldbuilding"],
@@ -3079,36 +3090,22 @@ document.querySelectorAll(".reveal, #diagram").forEach(n => io.observe(n));
     bind(b, n => n.setAttribute("aria-label", `${L(it.cap)} ${i + 1}/9`)); b.onclick = () => openLB(list, i, b); strip.appendChild(b); });
   $("#idOpen").onclick = e => openLB(list, 0, e.currentTarget);
   addWave($("#identity .wave"), 2, true);
-  /* o desenho: um mapa diz quando cada pixel aparece (primeiro o traço, depois as cores) */
-  const cv = $("#idDraw"), g = cv.getContext("2d", { willReadFrequently: true }), box = cv.parentElement, N = 480;
-  let tm = null, isLine = null, col = null, img = null, pen = [], t0 = 0, raf = 0, ready = false, want = false;
-  const load = src => new Promise((ok, no) => { const i = new Image(); i.decoding = "async"; i.onload = () => ok(i); i.onerror = no; i.src = R(src); });
-  const pixels = i => { const c = document.createElement("canvas"); c.width = c.height = N; const x = c.getContext("2d"); x.drawImage(i, 0, 0, N, N); return x.getImageData(0, 0, N, N).data; };
-  Promise.all([load(A + "brand/avatar-map.webp"), load(A + "brand/avatar-draw.webp")]).then(([m, c]) => {
-    const md = pixels(m); col = pixels(c); tm = new Float32Array(N * N); isLine = new Uint8Array(N * N);
-    const B = 160, sx = new Float32Array(B), sy = new Float32Array(B), sn = new Float32Array(B);
-    for (let i = 0; i < N * N; i++){ tm[i] = ((md[i*4] << 8) | md[i*4+1]) / 65534; isLine[i] = md[i*4+2] < 128;
-      if (isLine[i]){ const b = Math.min(B - 1, tm[i] * B | 0); sx[b] += i % N; sy[b] += i / N | 0; sn[b]++; } }
-    for (let b = 0; b < B; b++) if (sn[b]) pen.push([sx[b] / sn[b], sy[b] / sn[b], b / B]);
-    img = g.createImageData(N, N); ready = true;
-    if (reduce) paint(99); else { paint(0); if (want) play(); }
-  }).catch(() => { cv.replaceWith(Object.assign(new Image(), { src: R(A + "brand/avatar.webp"), alt: "" })); });
-  const LINE = 3.2, FILL0 = 2.9, FILL = 1.8;
-  function paint(e){
-    const pl = e / LINE, pf = (e - FILL0) / FILL, d = img.data;
-    for (let i = 0, j = 0; i < N * N; i++, j += 4){
-      const on = isLine[i] ? tm[i] <= pl : tm[i] <= pf;
-      if (on){ d[j] = col[j]; d[j+1] = col[j+1]; d[j+2] = col[j+2]; } else { d[j] = d[j+1] = d[j+2] = 255; }
-      d[j+3] = 255; }
-    g.putImageData(img, 0, 0);
-    if (pl > 0 && pl < 1){ let p = pen[0]; for (const q of pen){ if (q[2] <= pl) p = q; else break; }
-      g.fillStyle = "#1d1d1b"; g.beginPath(); g.arc(p[0], p[1], 9, 0, 7); g.fill(); g.fillStyle = "#e42320"; g.beginPath(); g.arc(p[0], p[1], 6, 0, 7); g.fill(); }
-    return pf >= 1;
-  }
-  function play(){ if (!ready){ want = true; return; } cancelAnimationFrame(raf); box.classList.remove("done"); t0 = performance.now();
-    const step = now => { if (paint((now - t0) / 1000)) { box.classList.add("done"); return; } raf = requestAnimationFrame(step); }; raf = requestAnimationFrame(step); }
+  /* o avatar: rascunho original acelerado + o traço digital final, num só vídeo */
+  const vid = $("#idVid"), box = vid.parentElement;
+  const play = () => { box.classList.remove("done"); try { vid.currentTime = 0; } catch (e) {} vid.play().catch(() => box.classList.add("done")); };
+  vid.addEventListener("ended", () => box.classList.add("done"));
   $("#idReplay").onclick = play;
-  new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting){ o.disconnect(); if (!reduce) play(); } }), { threshold: .45 }).observe(cv);
+  if (reduce){ box.classList.add("done"); vid.controls = true; }
+  else new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting){ o.disconnect(); play(); } }), { threshold: .45 }).observe(vid);
+  /* ocultar e expandir, igual aos projetos */
+  const sec = $("#identity"), more = $(".pmore-in", sec), tg = $("#idToggle");
+  more.inert = true;
+  const lbl = () => { $("span", tg).textContent = sec.classList.contains("open") ? tr("closeP") : tr("openI"); };
+  bind(tg, lbl);
+  tg.onclick = () => { const open = !sec.classList.contains("open");
+    if (!open && sec.getBoundingClientRect().top < 0) sec.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+    sec.classList.toggle("open", open); sec.classList.remove("opened"); more.inert = !open; tg.setAttribute("aria-expanded", open); lbl();
+    if (open) setTimeout(() => { if (sec.classList.contains("open")) sec.classList.add("opened"); }, reduce ? 0 : 620); };
 })();
 addWave($("#about .wave"), 9); addWave($("#beyond .wave"), 6); addWave($("#contact .wave"), 4);
 const wio = new IntersectionObserver(es => es.forEach(e => { const w = waves.find(w => w.svg === e.target); if (w) w.on = e.isIntersecting; }));
